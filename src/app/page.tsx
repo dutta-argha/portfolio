@@ -257,7 +257,7 @@ export default function Home() {
       </section>
 
       <footer className="section-shell footer">
-        <p>© {new Date().getFullYear()} Argha Dutta. Built with Next.js.</p>
+        <p>© {new Date().getFullYear()} Argha Dutta.</p>
       </footer>
     </main>
   );
