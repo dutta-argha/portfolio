@@ -90,7 +90,7 @@ const projectEntries = [
 
 const educationEntries = [
   {
-    university: "Maulana Abul Kalam Azad University of Technology, West Bengal",
+    school: "Maulana Abul Kalam Azad University of Technology, West Bengal",
     duration: "2022 - 2026",
     level: "Bachelor of Technology, Information Technology",
     note:
