@@ -14,18 +14,37 @@
 }
 
 html[data-theme="dark"] {
-  --bg: #0e1317;
-  --ink: #f5f4ee;
-  --muted: #b9b4a7;
-  --line: #3f4952;
-  --panel: rgba(20, 27, 33, 0.74);
-  --accent: #f2a775;
-  --accent-soft: #5f3f2f;
-  --bg-glow-1: #7a4326;
-  --bg-glow-2: #5a5f2d;
-  --bg-start: #111a20;
-  --bg-end: #0a1014;
-  --topbar-bg: rgba(15, 22, 28, 0.85);
+  --bg: #080d11;
+  --ink: #f7f3ea;
+  --muted: #b8b2a5;
+  --line: #2a333d;
+  --panel: rgba(13, 19, 25, 0.84);
+  --accent: #ffb27e;
+  --accent-soft: #4a2f23;
+  --bg-glow-1: #4f2918;
+  --bg-glow-2: #2c3520;
+  --bg-start: #0a1015;
+  --bg-end: #05090d;
+  --topbar-bg: rgba(9, 13, 18, 0.9);
+}
+
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .education-card,
+html[data-theme="dark"] .mobile-menu {
+  background: color-mix(in oklab, var(--panel) 92%, #020406 8%);
+  border-color: color-mix(in oklab, var(--line) 78%, #4a5764 22%);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.34);
+}
+
+html[data-theme="dark"] .theme-toggle,
+html[data-theme="dark"] .menu-toggle {
+  background: color-mix(in oklab, var(--panel) 88%, #000 12%);
+  border-color: color-mix(in oklab, var(--line) 72%, #4d5a66 28%);
+}
+
+html[data-theme="dark"] .topbar a:hover,
+html[data-theme="dark"] .contact-links a:hover {
+  color: color-mix(in oklab, var(--accent) 86%, #fff 14%);
 }
 
 * {
