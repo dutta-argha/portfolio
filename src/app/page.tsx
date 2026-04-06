@@ -297,12 +297,11 @@ export default function Home() {
         <h2>Education</h2>
         <div className="education-timeline">
           {educationEntries.map((entry) => (
-            <article key={`${entry.school}-${entry.duration}`} className="education-item">
+            <article key={`${entry.school}-${entry.level}`} className="education-item">
               <span className="edu-dot" aria-hidden="true" />
               <div className="education-card">
                 <div className="education-head">
                   <h3>{entry.school}</h3>
-                  <p className="edu-duration">{entry.duration}</p>
                 </div>
                 <p className="edu-degree">{entry.level}</p>
                 <p className="edu-note">{entry.note}</p>
