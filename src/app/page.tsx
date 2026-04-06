@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const skills = [
+const skillSections = [
   {
     title: "Programming Languages",
     items: ["Java", "JavaScript", "C", "Python", "C++"],
@@ -34,7 +34,7 @@ const skills = [
   },
 ];
 
-const projects = [
+const projectEntries = [
   {
     name: "WildGuard AI",
     summary:
@@ -85,6 +85,28 @@ const projects = [
       "Designed to optimize wind energy utilization.",
       "Achieved Rank 1 in a technical project competition.",
     ],
+  },
+];
+
+const educationEntries = [
+  {
+    university: "Maulana Abul Kalam Azad University of Technology, West Bengal",
+    duration: "2022 - 2026",
+    level: "Bachelor of Technology, Information Technology",
+    note:
+      "Final-year undergraduate focused on software engineering, full-stack development, and core computer science.",
+  },
+  {
+    school: "BHATAR M P HIGH SCHOOL",
+    duration: "2021",
+    level: "Higher Secondary (Class XII)",
+    note: "Board: WBCHSE | Stream: Science | Percentage: 84%",
+  },
+  {
+    school: "BAISNABDANGA SREE GOURANGA VIDYAPITH",
+    duration: "2019",
+    level: "Secondary (Class X)",
+    note: "Board: WBBSE | Percentage: 81.86%",
   },
 ];
 
@@ -215,17 +237,30 @@ export default function Home() {
 
       <section className="section-shell panel" id="education">
         <h2>Education</h2>
-        <article>
-          <h3>Maulana Abul Kalam Azad University of Technology</h3>
-          <p>Bachelor of Technology, Information Technology</p>
-          <p>2022 - 2026</p>
-        </article>
+        <div className="education-timeline">
+          {educationEntries.map((entry) => (
+            <article
+              key={`${entry.school}-${entry.duration}`}
+              className="education-item"
+            >
+              <span className="edu-dot" aria-hidden="true" />
+              <div className="education-card">
+                <div className="education-head">
+                  <h3>{entry.school}</h3>
+                  <p className="edu-duration">{entry.duration}</p>
+                </div>
+                <p className="edu-degree">{entry.level}</p>
+                <p className="edu-note">{entry.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="section-shell" id="skills">
         <h2>Skills</h2>
         <div className="skills-grid">
-          {skills.map((group) => (
+          {skillSections.map((group) => (
             <article key={group.title} className="panel skill-card">
               <h3>{group.title}</h3>
               <ul>
@@ -241,7 +276,7 @@ export default function Home() {
       <section className="section-shell" id="projects">
         <h2>Projects</h2>
         <div className="projects-grid">
-          {projects.map((project) => (
+          {projectEntries.map((project) => (
             <article key={project.name} className="panel project-card">
               <h3>{project.name}</h3>
               <p>{project.summary}</p>
