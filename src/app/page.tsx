@@ -89,7 +89,20 @@ const projects = [
 ];
 
 export default function Home() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") {
+      return "light";
+    }
+
+    const savedTheme = window.localStorage.getItem("theme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      return savedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
   const [photoIndex, setPhotoIndex] = useState(0);
 
   const profilePhotoCandidates = [
@@ -102,21 +115,13 @@ export default function Home() {
     profilePhotoCandidates[photoIndex] ?? "/profile-placeholder.svg";
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem("theme");
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-    const initialTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : systemTheme;
-
-    setTheme(initialTheme);
-    document.documentElement.setAttribute("data-theme", initialTheme);
-  }, []);
+    document.documentElement.setAttribute("data-theme", theme);
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
-    document.documentElement.setAttribute("data-theme", nextTheme);
-    window.localStorage.setItem("theme", nextTheme);
   };
 
   return (
@@ -134,8 +139,23 @@ export default function Home() {
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
           </nav>
-          <button className="theme-toggle" type="button" onClick={toggleTheme}>
-            {theme === "dark" ? "Light Mode" : "Dark Mode"}
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Light mode" : "Dark mode"}
+          >
+            {theme === "dark" ? (
+              <svg className="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="4.2" />
+                <path d="M12 2.5v2.2M12 19.3v2.2M4.8 4.8 6.4 6.4M17.6 17.6l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.8 19.2l1.6-1.6M17.6 6.4l1.6-1.6" />
+              </svg>
+            ) : (
+              <svg className="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.5 13.6a8 8 0 1 1-8.1-8.1 6.3 6.3 0 0 0 8.1 8.1Z" />
+              </svg>
+            )}
           </button>
         </div>
       </header>
