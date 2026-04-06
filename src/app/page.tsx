@@ -90,21 +90,17 @@ const projects = [
 
 const educationEntries = [
   {
-    school: "Maulana Abul Kalam Azad University of Technology, West Bengal",
-    duration: "2022 - 2026",
-    level: "Bachelor of Technology, Information Technology",
-    note:
-      "Final-year undergraduate focused on software engineering, full-stack development, and core computer science.",
+    school: "JIS COLLEGE OF ENGINEERING",
+    level: "Bachelor of Technology (B.Tech)",
+    note: "University: MAKAUT | Branch: Information Technology | GPA: 8.78*",
   },
   {
     school: "BHATAR M P HIGH SCHOOL",
-    duration: "2021",
     level: "Higher Secondary (Class XII)",
     note: "Board: WBCHSE | Stream: Science | Percentage: 84%",
   },
   {
     school: "BAISNABDANGA SREE GOURANGA VIDYAPITH",
-    duration: "2019",
     level: "Secondary (Class X)",
     note: "Board: WBBSE | Percentage: 81.86%",
   },
