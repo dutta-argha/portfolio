@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const skillSections = [
+const skills = [
   {
     title: "Programming Languages",
     items: ["Java", "JavaScript", "C", "Python", "C++"],
@@ -34,7 +34,7 @@ const skillSections = [
   },
 ];
 
-const projectEntries = [
+const projects = [
   {
     name: "WildGuard AI",
     summary:
@@ -126,6 +126,8 @@ export default function Home() {
       : "light";
   });
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
   const profilePhotoCandidates = [
     "/argha-photo.jpg",
@@ -141,9 +143,46 @@ export default function Home() {
     window.localStorage.setItem("theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    const handlePointerDown = (event: MouseEvent | TouchEvent) => {
+      if (!menuOpen) {
+        return;
+      }
+
+      const target = event.target;
+      if (
+        mobileMenuRef.current &&
+        target instanceof Node &&
+        !mobileMenuRef.current.contains(target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("touchstart", handlePointerDown);
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("touchstart", handlePointerDown);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
   };
 
   return (
@@ -154,7 +193,7 @@ export default function Home() {
       <header className="topbar section-shell">
         <p className="brand">Argha Dutta</p>
         <div className="nav-actions">
-          <nav>
+          <nav className="site-nav">
             <a href="#about">About</a>
             <a href="#education">Education</a>
             <a href="#skills">Skills</a>
@@ -179,6 +218,29 @@ export default function Home() {
               </svg>
             )}
           </button>
+          <div className="mobile-menu-shell" ref={mobileMenuRef}>
+            <button
+              className="menu-toggle"
+              type="button"
+              onClick={() => setMenuOpen((value) => !value)}
+              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+            {menuOpen ? (
+              <div className="mobile-menu" id="mobile-navigation">
+                <a href="#about" onClick={closeMenu}>About</a>
+                <a href="#education" onClick={closeMenu}>Education</a>
+                <a href="#skills" onClick={closeMenu}>Skills</a>
+                <a href="#projects" onClick={closeMenu}>Projects</a>
+                <a href="#contact" onClick={closeMenu}>Contact</a>
+              </div>
+            ) : null}
+          </div>
         </div>
       </header>
 
@@ -239,10 +301,7 @@ export default function Home() {
         <h2>Education</h2>
         <div className="education-timeline">
           {educationEntries.map((entry) => (
-            <article
-              key={`${entry.school}-${entry.duration}`}
-              className="education-item"
-            >
+            <article key={`${entry.school}-${entry.duration}`} className="education-item">
               <span className="edu-dot" aria-hidden="true" />
               <div className="education-card">
                 <div className="education-head">
@@ -260,7 +319,7 @@ export default function Home() {
       <section className="section-shell" id="skills">
         <h2>Skills</h2>
         <div className="skills-grid">
-          {skillSections.map((group) => (
+          {skills.map((group) => (
             <article key={group.title} className="panel skill-card">
               <h3>{group.title}</h3>
               <ul>
@@ -276,7 +335,7 @@ export default function Home() {
       <section className="section-shell" id="projects">
         <h2>Projects</h2>
         <div className="projects-grid">
-          {projectEntries.map((project) => (
+          {projects.map((project) => (
             <article key={project.name} className="panel project-card">
               <h3>{project.name}</h3>
               <p>{project.summary}</p>
