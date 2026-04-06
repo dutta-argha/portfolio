@@ -2,6 +2,8 @@
 
 A modern personal portfolio website built with Next.js and TypeScript to showcase my profile, technical skills, and project work.
 
+Live website: https://arghadutta.me
+
 ## Overview
 
 This project is designed as a fast, responsive, and clean one-page portfolio. It includes:
@@ -20,29 +22,6 @@ This project is designed as a fast, responsive, and clean one-page portfolio. It
 - TypeScript
 - CSS (custom styling in globals.css)
 - ESLint
-
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/dutta-argha/portfolio.git
-cd portfolio
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Run in development
-
-```bash
-npm run dev
-```
-
-Open http://localhost:3000 in your browser.
 
 ## Available Scripts
 
