@@ -339,7 +339,7 @@ h3,
 }
 
 .hero-photo-ring {
-  width: min(100%, 360px);
+  width: min(100%, 342px);
   border-radius: 1.15rem;
   padding: 0.5rem;
   background:
@@ -348,6 +348,7 @@ h3,
     var(--panel);
   border: 1px solid var(--line);
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
 }
 
 .hero-photo {
@@ -356,7 +357,8 @@ h3,
   display: block;
   border-radius: 0.9rem;
   object-fit: cover;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 4.7;
+  filter: saturate(1.04) contrast(1.02);
 }
 
 .button {
@@ -635,7 +637,7 @@ h2 {
   }
 
   .hero-photo-ring {
-    width: min(100%, 300px);
+    width: min(100%, 286px);
   }
 
   .projects-grid {
