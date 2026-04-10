@@ -107,20 +107,7 @@ const educationEntries = [
 ];
 
 export default function Home() {
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window === "undefined") {
-      return "light";
-    }
-
-    const savedTheme = window.localStorage.getItem("theme");
-    if (savedTheme === "dark" || savedTheme === "light") {
-      return savedTheme;
-    }
-
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  });
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [photoIndex, setPhotoIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
@@ -171,6 +158,9 @@ export default function Home() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+  }, []);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";

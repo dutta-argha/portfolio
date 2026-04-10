@@ -650,3 +650,17 @@ h2 {
     gap: 0.2rem;
   }
 }
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+
+  html.custom-cursor,
+  html.custom-cursor body,
+  html.custom-cursor a,
+  html.custom-cursor button {
+    cursor: auto;
+  }
+}
